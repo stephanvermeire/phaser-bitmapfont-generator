@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<font>
+    <info face="bbunch" size="12"/>
+    <common/>
+    <pages>
+        <page id="0" file="test.png"/>
+    </pages>
+    <chars>
+        <char id="97" x="0" y="0" width="35" height="64" xoffset="0" yoffset="0" xadvance="35" page="0"/>
+        <char id="98" x="35" y="0" width="33" height="64" xoffset="0" yoffset="0" xadvance="33" page="0"/>
+        <char id="48" x="68" y="0" width="41" height="64" xoffset="0" yoffset="0" xadvance="41" page="0"/>
+    </chars>
+</font>
