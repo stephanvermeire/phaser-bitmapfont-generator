@@ -6,6 +6,7 @@ module.exports = {
     width: 2520,
     height: 1080,
     autoFocus: false,
+    banner: false,
     render: {
         //antialiasGL: false
     },

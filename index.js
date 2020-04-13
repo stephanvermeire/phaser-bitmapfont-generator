@@ -5,20 +5,16 @@ class Generator {
     constructor() {
     }
 
-    TextStyle2BitmapFont(){
+    TextStyle2BitmapFont(props = {}){
 
         return new Promise((resolve)=>{
-            console.log("create phaser");
             var game = new Phaser.Game(config);
+            game.registry.set("props", props);
             game.registry.set("close", ()=>{
-                console.log('close');
                 game.destroy();
                 resolve();
             })
         });
-
-
-
 
     }
 }

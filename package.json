@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "canvas": "^2.6.1",
+    "fs-extra": "^9.0.0",
     "fse": "^4.0.1",
     "jsdom": "^16.2.2",
     "phaser": "^3.22.0",
