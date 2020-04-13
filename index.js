@@ -1,5 +1,5 @@
-const Phaser = require('./phaser/Phaser.js');
-const config = require('./phaser/config');
+const Phaser = require('./src/Phaser.js');
+const config = require('./src/config');
 
 class Generator {
     constructor() {
