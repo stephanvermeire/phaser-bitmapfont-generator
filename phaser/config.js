@@ -1,4 +1,3 @@
-const Phaser = require('phaser');
 const SceneGame = require('./SceneGame');
 
 module.exports = {
