@@ -23,13 +23,13 @@ class SceneGame extends Phaser.Scene {
 
         const props = this.game.registry.get("props");
 
-        let fontStyle = props.fontStyle || {};
-        if(!fontStyle.fontFamily) fontStyle.fontFamily = 'Arial';
-        if(!fontStyle.fontSize) fontStyle.fontSize = '20px';
+        let textStyle = props.textStyle || {};
+        if(!textStyle.fontFamily) textStyle.fontFamily = 'Arial';
+        if(!textStyle.fontSize) textStyle.fontSize = '20px';
 
-        const fontSize = Number(fontStyle.fontSize.replace('px', ''));
+        const fontSize = Number(textStyle.fontSize.replace('px', ''));
 
-        const fileName = props.fileName || `${fontStyle.fontFamily}${fontSize}`;
+        const fileName = props.fileName || `${textStyle.fontFamily}${fontSize}`;
         const path = props.path || './';
 
         const textSet = props.textSet || Phaser.GameObjects.RetroFont.TEXT_SET1;
@@ -44,7 +44,7 @@ class SceneGame extends Phaser.Scene {
             "font": {
                 "info": {
                     "_attributes": {
-                        "face": fontStyle.fontFamily,
+                        "face": textStyle.fontFamily,
                         "size": fontSize
                     }
                 },
@@ -65,7 +65,7 @@ class SceneGame extends Phaser.Scene {
 
         const maxWidth = 512;
         const rt = this.add.renderTexture(0, 0, maxWidth, 2048);
-        let txt = this.add.text(0, 0, '', fontStyle);
+        let txt = this.add.text(0, 0, '', textStyle);
         const metrics = txt.getTextMetrics();
 
         for (let i = 0; i<textSet.length; i++) {

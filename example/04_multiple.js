@@ -5,7 +5,7 @@ const generator = require("../index");
     await generator
         .TextStyle2BitmapFont(
             {
-                fontStyle: {
+                textStyle: {
                     fontFamily: 'Arial',
                     fontSize: '25px',
                     color: '#19db6d',
@@ -16,7 +16,7 @@ const generator = require("../index");
     await generator
         .TextStyle2BitmapFont(
             {
-                fontStyle: {
+                textStyle: {
                     fontFamily: 'Impact',
                     fontSize: '50px',
                     color: '#db7128',

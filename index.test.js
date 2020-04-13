@@ -23,10 +23,10 @@ describe("index.js", ()=>{
         fse.removeSync('./myDir');
     });
 
-    it("must generate a bitmapfont with a custom fontStyle", async ()=>{
+    it("must generate a bitmapfont with a custom textStyle", async ()=>{
         const result = await generator.TextStyle2BitmapFont({
             textSet: '01234',
-            fontStyle: {
+            textStyle: {
                 fontFamily: 'Impact',
                 fontSize: '50px',
                 color: '#ffffff',

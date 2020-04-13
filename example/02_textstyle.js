@@ -7,7 +7,7 @@ const generator = require("../index");
     //generate textures
     await generator.TextStyle2BitmapFont(
         {
-            fontStyle: {
+            textStyle: {
                 fontFamily: 'Impact',
                 fontSize: '50px',
                 color: '#ffffff',
