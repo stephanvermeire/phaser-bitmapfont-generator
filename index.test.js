@@ -1,4 +1,4 @@
-const Generator= require("./index");
+const generator= require("./index");
 const fs = require('fs');
 const fse = require('fs-extra');
 
@@ -9,7 +9,6 @@ describe("index.js", ()=>{
     });
 
     it("must generate a bitmapfont in a custom path", async ()=>{
-        const generator = new Generator();
         const result = await generator.TextStyle2BitmapFont({
             path: './mydir'
         });
@@ -25,7 +24,6 @@ describe("index.js", ()=>{
     });
 
     it("must generate a bitmapfont with a custom fontStyle", async ()=>{
-        const generator = new Generator();
         const result = await generator.TextStyle2BitmapFont({
             textSet: '01234',
             fontStyle: {
@@ -52,7 +50,6 @@ describe("index.js", ()=>{
     });
 
     it("must generate a bitmapfont with a custom path and filename", async ()=>{
-        const generator = new Generator();
         const result = await generator.TextStyle2BitmapFont({
             path: './',
             fileName: 'myBitmapfont'
@@ -67,7 +64,6 @@ describe("index.js", ()=>{
     });
 
     it("must generate a bitmapfont using default props", async ()=>{
-        const generator = new Generator();
         const result = await generator.TextStyle2BitmapFont();
         expect(result).toEqual(undefined);
 

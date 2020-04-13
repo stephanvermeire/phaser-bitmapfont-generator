@@ -1,5 +1,4 @@
-const Generator= require("../index");
-const generator = new Generator();
+const generator= require("../index");
 
 
 (async ()=>{

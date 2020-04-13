@@ -19,5 +19,5 @@ class Generator {
     }
 }
 
-module.exports = Generator;
+module.exports = new Generator();
 
