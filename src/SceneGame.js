@@ -26,6 +26,7 @@ class SceneGame extends Phaser.Scene {
         let textStyle = props.textStyle || {};
         if(!textStyle.fontFamily) textStyle.fontFamily = 'Arial';
         if(!textStyle.fontSize) textStyle.fontSize = '20px';
+        if(!textStyle.testString) textStyle.testString = Phaser.GameObjects.RetroFont.TEXT_SET1;
 
         const fontSize = Number(textStyle.fontSize.replace('px', ''));
 
@@ -68,10 +69,22 @@ class SceneGame extends Phaser.Scene {
         let txt = this.add.text(0, 0, '', textStyle);
         const metrics = txt.getTextMetrics();
 
+        //correct fontSize properties for shadow
+        let offsetX = 0;
+        let offsetY = 0;
+        if(!textStyle.metrics && textStyle.shadow){
+            let offsetX = textStyle.shadow.offsetX || 0;
+            let offsetY = textStyle.shadow.offsetY || 0;
+            metrics.fontSize += offsetY;
+            metrics.descent += offsetY;
+            textStyle.metrics = metrics;
+            txt.setStyle(textStyle);
+        }
+
         for (let i = 0; i<textSet.length; i++) {
             txt.setText(textSet[i]);
 
-            if(txt.x + txt.displayWidth > maxWidth){
+            if(txt.x + txt.displayWidth + offsetX > maxWidth){
                 txt.x = 0;
                 txt.y += metrics.fontSize;
             }
@@ -91,7 +104,7 @@ class SceneGame extends Phaser.Scene {
                 }
             });
 
-            txt.x += txt.displayWidth;
+            txt.x += txt.displayWidth + offsetX;
         }
         txt.setText('');
 
