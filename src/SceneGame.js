@@ -24,9 +24,9 @@ class SceneGame extends Phaser.Scene {
         const props = this.game.registry.get("props");
 
         let textStyle = props.textStyle || {};
-        if(!textStyle.fontFamily) textStyle.fontFamily = 'Arial';
-        if(!textStyle.fontSize) textStyle.fontSize = '20px';
-        if(!textStyle.testString) textStyle.testString = Phaser.GameObjects.RetroFont.TEXT_SET1;
+        if (!textStyle.fontFamily) textStyle.fontFamily = 'Arial';
+        if (!textStyle.fontSize) textStyle.fontSize = '20px';
+        if (!textStyle.testString) textStyle.testString = Phaser.GameObjects.RetroFont.TEXT_SET1;
 
         const fontSize = Number(textStyle.fontSize.replace('px', ''));
 
@@ -49,7 +49,12 @@ class SceneGame extends Phaser.Scene {
                         "size": fontSize
                     }
                 },
-                "common": {},
+                "common": {
+                    "_attributes": {
+                        "lineHeight": 0,
+                        "base": 0
+                    }
+                },
                 "pages": {
                     "page": {
                         "_attributes": {
@@ -72,7 +77,7 @@ class SceneGame extends Phaser.Scene {
         //correct fontSize properties for shadow
         let offsetX = 0;
         let offsetY = 0;
-        if(!textStyle.metrics && textStyle.shadow){
+        if (!textStyle.metrics && textStyle.shadow) {
             let offsetX = textStyle.shadow.offsetX || 0;
             let offsetY = textStyle.shadow.offsetY || 0;
             metrics.fontSize += offsetY;
@@ -81,10 +86,10 @@ class SceneGame extends Phaser.Scene {
             txt.setStyle(textStyle);
         }
 
-        for (let i = 0; i<textSet.length; i++) {
+        for (let i = 0; i < textSet.length; i++) {
             txt.setText(textSet[i]);
 
-            if(txt.x + txt.displayWidth + offsetX > maxWidth){
+            if (txt.x + txt.displayWidth + offsetX > maxWidth) {
                 txt.x = 0;
                 txt.y += metrics.fontSize;
             }
@@ -107,6 +112,11 @@ class SceneGame extends Phaser.Scene {
             txt.x += txt.displayWidth + offsetX;
         }
         txt.setText('');
+
+        //add common values
+        json.font.common._attributes.lineHeight = (metrics.fontSize - metrics.descent).toString();
+        json.font.common._attributes.base = metrics.descent.toString();
+
 
         fse.ensureDirSync(path);
 
