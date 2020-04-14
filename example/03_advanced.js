@@ -9,6 +9,7 @@ const generator = require("../index");
         {
             path: './mydir',
             fileName: 'myBitmapfont',
+            margin: 4,
             textSet: '01234',
             textStyle: {
                 fontFamily: 'Impact',
