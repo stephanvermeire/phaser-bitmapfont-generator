@@ -2,8 +2,8 @@ const SceneGame = require('./SceneGame');
 
 module.exports = {
     type: Phaser.CANVAS,
-    width: 2520,
-    height: 1080,
+    width: 2048,
+    height: 2048,
     autoFocus: false,
     banner: false,
     render: {

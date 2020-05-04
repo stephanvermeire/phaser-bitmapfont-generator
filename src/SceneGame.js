@@ -69,10 +69,14 @@ class SceneGame extends Phaser.Scene {
             }
         };
 
-        const maxWidth = 512;
-        const rt = this.add.renderTexture(0, 0, maxWidth, 2048);
-        let txt = this.add.text(0, 0, '', textStyle);
+        let txt = this.add.text(0, 0, textSet, textStyle);
         const metrics = txt.getTextMetrics();
+
+        //make rough estimate of the required canvas width
+        const maxWidth = Math.ceil(Math.sqrt(txt.width * txt.height)/512) * 512;
+        const rt = this.add.renderTexture(0, 0, maxWidth, 2048);
+
+        txt.setText('');
 
         //correct fontSize properties for shadow
         let offsetX = 0;

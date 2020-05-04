@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "devDependencies": {
+    "image-size": "^0.8.3",
     "jest": "^25.3.0"
   },
   "dependencies": {

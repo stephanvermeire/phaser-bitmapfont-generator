@@ -1,11 +1,41 @@
 const generator= require("./index");
 const fs = require('fs');
 const fse = require('fs-extra');
+const sizeOf = require('image-size');
 
 describe("index.js", ()=>{
 
     afterAll(async()=>{
 
+    });
+
+    it("must render large a .png file", async ()=>{
+        const result = await generator.TextStyle2BitmapFont({
+            //textSet: '01234',
+            margin: 2,
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '150px',
+                color: '#ffffff',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    blur: 0,
+                    fill: true,
+                    stroke: true,
+                    color: '#000000'
+                },
+            }
+        });
+        expect(result).toEqual(undefined);
+
+        expect(fs.existsSync('./Impact150.png')).toEqual(true);
+        const dimensions = sizeOf('./Impact150.png');
+        expect(dimensions.width).toBeGreaterThan(512);
+        fs.unlinkSync('./Impact150.png');
+
+        expect(fs.existsSync('./Impact150.xml')).toEqual(true);
+        fs.unlinkSync('./Impact150.xml');
     });
 
     it("must generate a bitmapfont in a custom path", async ()=>{
