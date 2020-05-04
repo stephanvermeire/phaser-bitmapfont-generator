@@ -34,6 +34,7 @@ class SceneGame extends Phaser.Scene {
 
         const fileName = props.fileName || `${textStyle.fontFamily}${fontSize}`;
         const path = props.path || './';
+        const margin = (typeof props.margin === 'number') ? props.margin : 1;
 
         const textSet = props.textSet || Phaser.GameObjects.RetroFont.TEXT_SET1;
 
@@ -86,8 +87,8 @@ class SceneGame extends Phaser.Scene {
         let offsetX = 0;
         let offsetY = 0;
         if (!textStyle.metrics && textStyle.shadow) {
-            let offsetX = textStyle.shadow.offsetX || 0;
-            let offsetY = textStyle.shadow.offsetY || 0;
+            offsetX = Math.ceil(textStyle.shadow.offsetX) || 0;
+            offsetY = Math.ceil(textStyle.shadow.offsetY) || 0;
             metrics.fontSize += offsetY;
             metrics.descent += offsetY;
             textStyle.metrics = metrics;
@@ -97,27 +98,32 @@ class SceneGame extends Phaser.Scene {
         for (let i = 0; i < textSet.length; i++) {
             txt.setText(textSet[i]);
 
-            if (txt.x + txt.displayWidth + offsetX > maxWidth) {
+            const displayWidth = txt.displayWidth;
+            const id = txt.text.charCodeAt(0).toString();
+
+            if (txt.x + displayWidth + offsetX > maxWidth) {
                 txt.x = 0;
-                txt.y += metrics.fontSize;
+                txt.y += metrics.fontSize + margin;
             }
+            //add space in order to capture shadow correctly
+            txt.setText(`${textSet[i]} `);
             rt.draw(txt);
 
             json.font.chars.char.push({
                 "_attributes": {
-                    "id": txt.text.charCodeAt(0).toString(),
+                    "id": id,
                     "x": txt.x.toString(),
                     "y": txt.y.toString(),
-                    "width": txt.displayWidth.toString(),
+                    "width": (displayWidth + offsetX).toString(),
                     "height": metrics.fontSize.toString(),
                     "xoffset": "0",
                     "yoffset": "0",
-                    "xadvance": txt.displayWidth.toString(),
+                    "xadvance": displayWidth.toString(),
                     "page": "0"
                 }
             });
 
-            txt.x += txt.displayWidth + offsetX;
+            txt.x += displayWidth + offsetX + margin;
         }
         txt.setText('');
 
