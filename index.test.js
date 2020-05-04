@@ -5,9 +5,59 @@ const sizeOf = require('image-size');
 
 describe("index.js", ()=>{
 
+    jest.setTimeout(9999999);
+
     afterAll(async()=>{
 
     });
+
+    it("must generate a compressed .png file", async ()=>{
+        await generator.TextStyle2BitmapFont({
+            compression: {
+                speed: 4,
+                quality: [1, 1]
+            },            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    blur: 0,
+                    fill: true,
+                    stroke: true,
+                    color: '#000000'
+                },
+            }
+        });
+        var statsUncompressed = fse.statSync("./Impact50.png");
+
+        await generator.TextStyle2BitmapFont({
+            compression: {
+                speed: 4,
+                quality: [.3, .5]
+            },
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    blur: 0,
+                    fill: true,
+                    stroke: true,
+                    color: '#000000'
+                },
+            }
+        });
+        var statsCompressed = fse.statSync("./Impact50.png")
+
+        expect(statsCompressed.size).toBeLessThan(statsUncompressed.size);
+        fs.unlinkSync('./Impact50.png');
+        fs.unlinkSync('./Impact50.xml');
+    });
+
 
     it("must render large a .png file", async ()=>{
         const result = await generator.TextStyle2BitmapFont({

@@ -2,6 +2,8 @@ const fs = require('fs');
 const fse = require('fs-extra');
 const nodepath = require('path');
 const convert = require('xml-js');
+const imagemin = require('imagemin');
+const imageminPngquant = require('imagemin-pngquant');
 
 
 class SceneGame extends Phaser.Scene {
@@ -34,6 +36,8 @@ class SceneGame extends Phaser.Scene {
         const path = props.path || './';
 
         const textSet = props.textSet || Phaser.GameObjects.RetroFont.TEXT_SET1;
+
+        const compressionOptions =  (typeof props.compression === 'null') ? NULL : props.compression || {quality: [ .3, .5 ]};
 
 
         let json = {
@@ -135,7 +139,22 @@ class SceneGame extends Phaser.Scene {
 
         //write png
         var data = img.src.replace(/^data:image\/png;base64,/, "");
-        fs.writeFileSync(nodepath.join(path, `${fileName}.png`), data, {encoding: 'base64'});
+
+        let buffer = Buffer.from(data, 'base64');
+
+        if(compressionOptions){
+            buffer = await imagemin.buffer(buffer, {
+                plugins: [
+                    imageminPngquant(compressionOptions)
+                ]
+            });
+        }
+
+
+        fse.writeFileSync(nodepath.join(path, `${fileName}.png`),
+            buffer
+            //{encoding: 'base64'}
+            );
 
 
         //close engine
