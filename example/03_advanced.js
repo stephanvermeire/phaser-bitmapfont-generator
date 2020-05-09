@@ -13,16 +13,16 @@ const generator = require("../index");
             textSet: '01234',
             textStyle: {
                 fontFamily: 'Impact',
-                fontSize: '50px',
-                color: '#ffffff',
-                shadow: {
-                    offsetX: 1,
-                    offsetY: 1,
-                    blur: 0,
-                    fill: true,
-                    stroke: true,
-                    color: '#000000'
-                },
+                fontSize: '150px',
+                color: '#000000',
+                // shadow: {
+                //     offsetX: 4,
+                //     offsetY: 4,
+                //     blur: 0,
+                //     fill: true,
+                //     stroke: true,
+                //     color: '#000000'
+                // },
             }
         }
     );

@@ -136,8 +136,8 @@ describe("index.js", ()=>{
         });
         expect(result).toEqual(undefined);
 
-        expect(fs.existsSync('./myBitmapfont.png')).toEqual(true);
-        fs.unlinkSync('./myBitmapfont.png');
+        expect(fs.existsSync('./example.png')).toEqual(true);
+        fs.unlinkSync('./example.png');
 
         expect(fs.existsSync('./myBitmapfont.xml')).toEqual(true);
         fs.unlinkSync('./myBitmapfont.xml');

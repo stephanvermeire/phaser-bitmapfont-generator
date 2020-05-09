@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<font>
+    <info face="Impact" size="150"/>
+    <common lineHeight="130" base="22"/>
+    <pages>
+        <page id="0" file="myBitmapfont.png"/>
+    </pages>
+    <chars>
+        <char id="48" x="0" y="0" width="80" height="152" xoffset="0" yoffset="0" xadvance="80" page="0"/>
+        <char id="49" x="84" y="0" width="57" height="152" xoffset="0" yoffset="0" xadvance="57" page="0"/>
+        <char id="50" x="145" y="0" width="75" height="152" xoffset="0" yoffset="0" xadvance="75" page="0"/>
+        <char id="51" x="224" y="0" width="80" height="152" xoffset="0" yoffset="0" xadvance="80" page="0"/>
+        <char id="52" x="308" y="0" width="75" height="152" xoffset="0" yoffset="0" xadvance="75" page="0"/>
+    </chars>
+</font>
