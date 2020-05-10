@@ -11,6 +11,79 @@ describe("index.js", ()=>{
 
     });
 
+    it("must generate a .png file with reduced colour depth", async ()=>{
+        await generator.TextStyle2BitmapFont({
+            compression: null,
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    blur: 0,
+                    fill: true,
+                    stroke: true,
+                    color: '#000000'
+                },
+            },
+            antialias: false,
+        });
+        var stats1 = fse.statSync("./Impact50.png");
+
+        await generator.TextStyle2BitmapFont({
+            compression: null,
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+                shadow: {
+                    offsetX: 1,
+                    offsetY: 1,
+                    blur: 0,
+                    fill: true,
+                    stroke: true,
+                    color: '#000000'
+                },
+            },
+            antialias: false,
+            maxNumberOfColours: 3
+        });
+        var stats2 = fse.statSync("./Impact50.png")
+
+        expect(stats2.size).toBeLessThan(stats1.size);
+        fs.unlinkSync('./Impact50.png');
+        fs.unlinkSync('./Impact50.xml');
+    });
+
+
+    it("must generate a .png file with antialias turned off", async ()=>{
+        await generator.TextStyle2BitmapFont({
+            compression: null,
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+            }
+        });
+        var stats1 = fse.statSync("./Impact50.png");
+
+        await generator.TextStyle2BitmapFont({
+            compression: null,
+            textStyle: {
+                fontFamily: 'Impact',
+                fontSize: '50px',
+                color: '#ffffff',
+            },
+            antialias: false
+        });
+        var stats2 = fse.statSync("./Impact50.png")
+
+        expect(stats2.size).toBeLessThan(stats1.size);
+        fs.unlinkSync('./Impact50.png');
+        fs.unlinkSync('./Impact50.xml');
+    });
+
     it("must generate a compressed .png file", async ()=>{
         await generator.TextStyle2BitmapFont({
             compression: {
@@ -57,7 +130,6 @@ describe("index.js", ()=>{
         fs.unlinkSync('./Impact50.png');
         fs.unlinkSync('./Impact50.xml');
     });
-
 
     it("must render large a .png file", async ()=>{
         const result = await generator.TextStyle2BitmapFont({
@@ -136,8 +208,8 @@ describe("index.js", ()=>{
         });
         expect(result).toEqual(undefined);
 
-        expect(fs.existsSync('./example.png')).toEqual(true);
-        fs.unlinkSync('./example.png');
+        expect(fs.existsSync('./myBitmapfont.png')).toEqual(true);
+        fs.unlinkSync('./myBitmapfont.png');
 
         expect(fs.existsSync('./myBitmapfont.xml')).toEqual(true);
         fs.unlinkSync('./myBitmapfont.xml');
