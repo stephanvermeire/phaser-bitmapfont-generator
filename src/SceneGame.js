@@ -132,7 +132,8 @@ class SceneGame extends Phaser.Scene {
         txt.setText('');
 
         //add common values
-        json.font.common._attributes.lineHeight = (metrics.fontSize - metrics.descent).toString();
+        const baselineY = textStyle.baselineY || 1.4
+        json.font.common._attributes.lineHeight = (Math.round((metrics.fontSize - metrics.descent) * baselineY)).toString();
         json.font.common._attributes.base = metrics.descent.toString();
 
 
