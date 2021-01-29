@@ -1,6 +1,6 @@
 {
   "name": "@rtpa/phaser-bitmapfont-generator",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Node.js module that generates bitmap fonts (xml + png) from a Phaser 3 TextStyle json object\"",
   "main": "index.js",
   "repository": "https://github.com/stephanvermeire/phaser-bitmapfont-generator.git",
