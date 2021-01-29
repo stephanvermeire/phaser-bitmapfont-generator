@@ -24,7 +24,7 @@
     "imagemin-pngquant": "^8.0.0",
     "jimp": "^0.10.3",
     "jsdom": "^16.2.2",
-    "phaser": "^3.22.0",
+    "phaser": "3.22.0",
     "xml-js": "^1.6.11"
   }
 }
